@@ -29,6 +29,7 @@ start_parallel <- function(parallel=TRUE,
                            parallel_type=NULL,
                            seed=NULL,
                            dlls=NULL,
+                           mrgsolve_model=NULL,
                            ...)
 {
   # Start parallel computing for poped package
@@ -76,6 +77,11 @@ start_parallel <- function(parallel=TRUE,
         }
       }
       
+      # load mrgsolve models in workers using loadso
+      if (!is.null(mrgsolve_model)) {
+        parallel::clusterCall(cl, loadso, x=mrgsolve_model)
+      }
+                    
     } else if(parallel_type == "multicore") { 
       if(!is.null(seed)){
         RNGkind("L'Ecuyer-CMRG") 
