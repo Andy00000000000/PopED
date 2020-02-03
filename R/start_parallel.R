@@ -77,7 +77,7 @@ start_parallel <- function(parallel=TRUE,
         }
       }
       
-      # load mrgsolve models in workers using loadso
+      # FIX BY Vincent-AC : load mrgsolve models in workers using loadso
       if (!is.null(mrgsolve_model)) {
         parallel::clusterCall(cl, loadso, x=mrgsolve_model)
       }
